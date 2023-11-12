@@ -1,5 +1,6 @@
 import @cpoint-raylib
 import @std/print.cpoint
+import @std/rand.cpoint
 
 ?[define PLAYER_SPEED 150]
 
@@ -9,8 +10,6 @@ enum direction {
     right
     left
 }
-
-extern rand() int;
 
 struct Fruit {
     var x : int
@@ -38,8 +37,8 @@ func main(){
     snake.width = player_width_start
     snake.height = player_height_start
     var fruit : struct Fruit
-    fruit.x = rand() % 800
-    fruit.y = rand() % 500
+    fruit.x = rand::random() % 800
+    fruit.y = rand::random() % 500
     fruit.size = 40
     while WindowShouldClose() == false {
         var deltaTime = GetFrameTime()
