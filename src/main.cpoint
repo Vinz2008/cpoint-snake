@@ -78,8 +78,8 @@ func main(){
         }
         BeginDrawing()
             ClearBackground(RAYWHITE)
-            DrawRectangle(pos_snake_x, pos_snake_y, snake.width, snake.height, GREEN)
             DrawRectangle(fruit.x, fruit.y, fruit.size, fruit.size, RED)
+            DrawRectangle(pos_snake_x, pos_snake_y, snake.width, snake.height, GREEN)
         EndDrawing()
     }
     CloseWindow()
