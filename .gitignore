@@ -1,0 +1,6 @@
+*.out
+*.a
+*.ll
+*.o
+*.log
+*.temp

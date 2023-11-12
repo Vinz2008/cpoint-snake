@@ -1,0 +1,104 @@
+import @cpoint-raylib
+import @std/print.cpoint
+
+?[define PLAYER_SPEED 150]
+
+enum direction {
+    top
+    down
+    right
+    left
+}
+
+extern rand() int;
+
+struct Fruit {
+    var x : int
+    var y : int
+    var size : int
+}
+
+struct Snake {
+    var width : int
+    var height : int
+}
+
+func main(){
+    InitWindow(800, 500, "test raylib")
+    var RAYWHITE = Color {245, 245, 245, 255}
+    var LIGHTGRAY = Color {200, 200, 200, 255}
+    var GREEN = Color {0, 228, 48, 255}
+    var RED = Color {230, 41, 55, 255}
+    var pos_snake_x = 10
+    var pos_snake_y = 200
+    var player_direction : enum direction = direction::left
+    var player_width_start = 300
+    var player_height_start = 70
+    var snake : struct Snake
+    snake.width = player_width_start
+    snake.height = player_height_start
+    // var player_width = player_width_start
+    // var player_height = player_height_start
+    var fruit : struct Fruit
+    fruit.x = rand() % 800
+    fruit.y = rand() % 500
+    fruit.size = 40
+    // var fruit_x = rand() % 800
+    // var fruit_y = rand() % 500
+    while WindowShouldClose() == false {
+        var deltaTime = GetFrameTime()
+        if IsKeyDown(KEY_UP){
+            player_direction = direction::top
+            // pos_snake_y = pos_snake_y - PLAYER_SPEED * deltaTime
+        }
+        if IsKeyDown(KEY_DOWN){
+            player_direction = direction::down
+            // pos_snake_y = pos_snake_y + PLAYER_SPEED * deltaTime
+        }
+        if IsKeyDown(KEY_RIGHT){
+            player_direction = direction::right
+            // pos_snake_x = pos_snake_x + PLAYER_SPEED * deltaTime
+        }
+        if IsKeyDown(KEY_LEFT){
+            player_direction = direction::left
+            // pos_snake_x = pos_snake_x - PLAYER_SPEED * deltaTime
+        }
+        match player_direction {
+            direction::top => {
+                pos_snake_y = pos_snake_y - PLAYER_SPEED * deltaTime
+                // player_height = player_width_start
+                // player_width = player_height_start
+                snake.height = player_width_start
+                snake.width = player_height_start
+            }
+            direction::down => {
+                pos_snake_y = pos_snake_y + PLAYER_SPEED * deltaTime
+                // player_height = player_width_start
+                // player_width = player_height_start
+                snake.height = player_width_start
+                snake.width = player_height_start
+            }
+            direction::right => {
+                pos_snake_x = pos_snake_x + PLAYER_SPEED * deltaTime
+                // player_width = player_width_start
+                // player_height = player_height_start
+                snake.width = player_width_start
+                snake.height = player_height_start
+            }
+            direction::left => {
+                pos_snake_x = pos_snake_x - PLAYER_SPEED * deltaTime
+                // player_width = player_width_start
+                // player_height = player_height_start
+                snake.width = player_width_start
+                snake.height = player_height_start
+            }
+        }
+        BeginDrawing()
+            ClearBackground(RAYWHITE)
+            // DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY)
+            DrawRectangle(pos_snake_x, pos_snake_y, snake.width, snake.height, GREEN)
+            DrawRectangle(fruit.x, fruit.y, fruit.size, fruit.size, RED)
+        EndDrawing()
+    }
+    CloseWindow()
+}

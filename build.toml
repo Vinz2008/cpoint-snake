@@ -1,0 +1,8 @@
+[project]
+name = "cpoint-raylib-snake"
+homepage = "https://github.com/test"
+license = "GPL"
+type = "exe"
+
+[dependencies]
+github = ["Vinz2008/cpoint-raylib"]
