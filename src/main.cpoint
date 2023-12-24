@@ -3,6 +3,7 @@ import @std/print.cpoint
 import @std/rand.cpoint
 
 ?[define PLAYER_SPEED 150]
+?[define SQUARE_SIZE 31]
 
 enum direction {
     top
@@ -22,8 +23,25 @@ struct Snake {
     var height : int
 }
 
+var const screen_width : int = 800;
+var const screen_height : int = 500;
+
+var offset : struct Vector2;
+
+func drawGrid(color : struct Color) void {
+    for i : float = 0, i < screen_width/SQUARE_SIZE + 1, 1 {
+        var vectorStartPos : struct Vector2
+        vectorStartPos.x = SQUARE_SIZE*i + offset.x/2
+        vectorStartPos.y = offset.y/2
+        var vectorEndPos : struct Vector2
+        vectorEndPos.x = SQUARE_SIZE * i + offset.x/2
+        vectorEndPos.y = screen_height - offset.y/2
+        DrawLineV(vectorStartPos, vectorEndPos, color)
+    }
+}
+
 func main(){
-    InitWindow(800, 500, "test raylib")
+    InitWindow(screen_width, screen_height, "test raylib")
     var RAYWHITE = Color {245, 245, 245, 255}
     var LIGHTGRAY = Color {200, 200, 200, 255}
     var GREEN = Color {0, 228, 48, 255}
@@ -40,6 +58,9 @@ func main(){
     fruit.x = rand::random() % 800
     fruit.y = rand::random() % 500
     fruit.size = 40
+    offset.x = screen_width % SQUARE_SIZE
+    offset.y = screen_height % SQUARE_SIZE
+
     while WindowShouldClose() == false {
         var deltaTime = GetFrameTime()
         if IsKeyDown(KEY_UP){
@@ -78,6 +99,7 @@ func main(){
         }
         BeginDrawing()
             ClearBackground(RAYWHITE)
+            drawGrid(LIGHTGRAY)
             DrawRectangle(fruit.x, fruit.y, fruit.size, fruit.size, RED)
             DrawRectangle(pos_snake_x, pos_snake_y, snake.width, snake.height, GREEN)
         EndDrawing()
