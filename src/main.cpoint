@@ -38,10 +38,19 @@ func drawGrid(color : struct Color) void {
         vectorEndPos.y = screen_height - offset.y/2
         DrawLineV(vectorStartPos, vectorEndPos, color)
     }
+    for i : float = 0, i < screen_height/SQUARE_SIZE + 1, 1 {
+        var vectorStartPos : struct Vector2
+        vectorStartPos.x = offset.x/2
+        vectorStartPos.y = SQUARE_SIZE*i + offset.y/2
+        var vectorEndPos : struct Vector2
+        vectorEndPos.x = screen_width - offset.x/2
+        vectorEndPos.y =  SQUARE_SIZE*i + offset.y/2
+        DrawLineV(vectorStartPos, vectorEndPos, color)
+    }
 }
 
 func main(){
-    InitWindow(screen_width, screen_height, "test raylib")
+    InitWindow(screen_width, screen_height, null)
     var RAYWHITE = Color {245, 245, 245, 255}
     var LIGHTGRAY = Color {200, 200, 200, 255}
     var GREEN = Color {0, 228, 48, 255}
