@@ -50,7 +50,7 @@ func drawGrid(color : struct Color) void {
 }
 
 func main(){
-    InitWindow(screen_width, screen_height, null)
+    InitWindow(screen_width, screen_height, "Snake")
     var RAYWHITE = Color {245, 245, 245, 255}
     var LIGHTGRAY = Color {200, 200, 200, 255}
     var GREEN = Color {0, 228, 48, 255}
