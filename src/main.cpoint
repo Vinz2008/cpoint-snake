@@ -55,8 +55,8 @@ func main(){
     var LIGHTGRAY = Color {200, 200, 200, 255}
     var GREEN = Color {0, 228, 48, 255}
     var RED = Color {230, 41, 55, 255}
-    var pos_snake_x = 10
-    var pos_snake_y = 200
+    var pos_snake_x : float = 10
+    var pos_snake_y : float = 200
     var player_direction : enum direction = direction::left
     var player_width_start = 300
     var player_height_start = 70
@@ -69,19 +69,18 @@ func main(){
     fruit.size = 40
     offset.x = screen_width % SQUARE_SIZE
     offset.y = screen_height % SQUARE_SIZE
-
     while WindowShouldClose() == false {
         var deltaTime = GetFrameTime()
-        if IsKeyDown(KEY_UP){
+        if IsKeyDown(KeyboardKey::KEY_UP){
             player_direction = direction::top
         }
-        if IsKeyDown(KEY_DOWN){
+        if IsKeyDown(KeyboardKey::KEY_DOWN){
             player_direction = direction::down
         }
-        if IsKeyDown(KEY_RIGHT){
+        if IsKeyDown(KeyboardKey::KEY_RIGHT){
             player_direction = direction::right
         }
-        if IsKeyDown(KEY_LEFT){
+        if IsKeyDown(KeyboardKey::KEY_LEFT){
             player_direction = direction::left
         }
         match player_direction {
@@ -106,6 +105,7 @@ func main(){
                 snake.height = player_height_start
             }
         }
+        #println("x : {}, y : {}", pos_snake_x, pos_snake_y)
         BeginDrawing()
             ClearBackground(RAYWHITE)
             drawGrid(LIGHTGRAY)
